@@ -6,6 +6,9 @@ include_directories(include)
 include_directories(src)
 
 add_executable(NeuralNetwork 
+    src/funcs.cpp
+    src/layer.cpp
+    src/network.cpp
     src/main.cpp)
 
 find_package(Eigen3 REQUIRED)

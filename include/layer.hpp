@@ -16,12 +16,13 @@ private:
     Eigen::VectorXd delta;
 public:
     Layer(int input_size_n, int neurons, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func_deriv);
-    void forward(Eigen::VectorXd &in);
+    void forward(const Eigen::VectorXd &in);
     Eigen::VectorXd getActiveNeurons();
     void setDelta(const Eigen::VectorXd& d);
     Eigen::VectorXd getDelta();
     Eigen::MatrixXd getWeights();
     void updateWeights(const Eigen::VectorXd& input, double learning_rate);
+    Eigen::VectorXd activationDerivative();
 };
 
 #endif // LAYER_H_
