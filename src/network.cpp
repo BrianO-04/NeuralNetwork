@@ -18,10 +18,10 @@ void NeuralNetwork::forwardPass(Eigen::VectorXd& input){
     }
 }
 
-void NeuralNetwork::backPass(Eigen::VectorXd &input, Eigen::VectorXd &target, double learning_rate){
-    Eigen::VectorXd out_error = error_func_derivative(getOutput(), target);
-    Eigen::VectorXd out_derivatives = layers.back().activationDerivative();
-    Eigen::VectorXd out_delta = out_error.cwiseProduct(out_derivatives);
+void NeuralNetwork::backPass(Eigen::VectorXd& input, Eigen::VectorXd& probabilities, Eigen::VectorXd& target, double learning_rate){
+    // Eigen::VectorXd out_error = error_func_derivative(getOutput(), target);
+    // Eigen::VectorXd out_derivatives = layers.back().activationDerivative();
+    Eigen::VectorXd out_delta = probabilities - target;
     layers.back().setDelta(out_delta);
 
     for(int i = layers.size()-2; i >= 0; i--){
@@ -56,11 +56,11 @@ void NeuralNetwork::train(const std::vector<Eigen::VectorXd> &inputs, const std:
 
             forwardPass(input);
 
-            Eigen::VectorXd output = getOutput();
-            double loss = error_func(output, target);
+            Eigen::VectorXd probs = SoftMax(getOutput());
+            double loss = CrossEntropy(probs, target);
             epochLoss += loss;
 
-            backPass(input, target, learning_rate);
+            backPass(input, probs, target, learning_rate);
         }
         epochLoss /= inputs.size();
 
