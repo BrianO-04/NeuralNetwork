@@ -2,7 +2,7 @@
 #include <Eigen/Core>
 
 Layer::Layer(int input_size_n, int neurons, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func_deriv){
-    weights = Eigen::MatrixXd::Random(neurons, input_size_n);
+    weights = Eigen::MatrixXd::Random(neurons, input_size_n) * std::sqrt(6.0 / static_cast<double>(input_size_n));
     biases = Eigen::VectorXd::Zero(neurons);
     activation_func = ac_func;
     activation_func_derivative = ac_func_deriv;

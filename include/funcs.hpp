@@ -17,4 +17,8 @@ double error_func(const Eigen::VectorXd &out, const Eigen::VectorXd &target);
 
 Eigen::VectorXd error_func_derivative(const Eigen::VectorXd &out, const Eigen::VectorXd &target);
 
+Eigen::VectorXd SoftMax(const Eigen::VectorXd& logits);
+
+double CrossEntropy(const Eigen::VectorXd& probabilities, const Eigen::VectorXd& target);
+
 #endif // FUNCS_H_

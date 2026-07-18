@@ -16,6 +16,7 @@ public:
     void forwardPass(Eigen::VectorXd& input);
     void backPass(Eigen::VectorXd& input, Eigen::VectorXd& target, double learning_rate);
     void train(const std::vector<Eigen::VectorXd>& inputs, const std::vector<Eigen::VectorXd>& targets, double learning_rate, int epochs);
+    void test(const std::vector<Eigen::VectorXd>& inputs, const std::vector<Eigen::VectorXd>& targets);
 };
 
 #endif
