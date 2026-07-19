@@ -3,7 +3,6 @@
 
 #include <Eigen/Core>
 #include <Eigen/Dense>
-#include <algorithm>
 
 Eigen::VectorXd ReLU(const Eigen::VectorXd &v);
 
