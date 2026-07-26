@@ -1,6 +1,8 @@
 # NeuralNetwork
 
-Inspired by https://github.com/FelipesCoding/neural_network_from_scratch
+This repository contains the latest stable version of my C++ neural network code.
+
+Initial implementation inspired by: https://github.com/FelipesCoding/neural_network_from_scratch
 
 ## Requirements
 
