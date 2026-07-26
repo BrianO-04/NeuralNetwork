@@ -1,21 +1,20 @@
 #include "layer.hpp"
-#include <Eigen/Core>
 
 Layer::Layer(int input_size_n, int neurons, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func, std::function<Eigen::VectorXd(const Eigen::VectorXd&)> ac_func_deriv){
     weights = Eigen::MatrixXd::Random(neurons, input_size_n) * std::sqrt(6.0 / static_cast<double>(input_size_n));
     biases = Eigen::VectorXd::Zero(neurons);
-    activation_func = ac_func;
-    activation_func_derivative = ac_func_deriv;
+    Activation = ac_func;
+    Activation_derivative = ac_func_deriv;
 }
 
 void Layer::forward(const Eigen::VectorXd &in){
     Eigen::VectorXd Y = weights * in + biases;
-    neuron_vals = Y;
-    neuron_activations = activation_func(Y);
+    neuronVals = Y;
+    neuronActivations = Activation(Y);
 }
 
 Eigen::VectorXd Layer::getActiveNeurons(){
-    return neuron_activations;
+    return neuronActivations;
 }
 
 void Layer::setDelta(const Eigen::VectorXd &d){
@@ -24,6 +23,10 @@ void Layer::setDelta(const Eigen::VectorXd &d){
 
 Eigen::VectorXd Layer::getDelta(){
     return delta;
+}
+
+Eigen::VectorXd Layer::getBiases(){
+    return biases;
 }
 
 Eigen::MatrixXd Layer::getWeights(){
@@ -35,6 +38,14 @@ void Layer::updateWeights(const Eigen::VectorXd &input, double learning_rate){
     biases -= learning_rate * delta;
 }
 
-Eigen::VectorXd Layer::activationDerivative(){
-    return activation_func_derivative(neuron_vals);
+Eigen::VectorXd Layer::getActiveDerivative(){
+    return Activation_derivative(neuronVals);
+}
+
+void Layer::setWeights(Eigen::MatrixXd w, Eigen::VectorXd b, Eigen::Index rows, Eigen::Index cols, Eigen::Index bSize){
+    weights.resize(rows, cols);
+    weights = w;
+
+    biases.resize(bSize);
+    biases = b;
 }

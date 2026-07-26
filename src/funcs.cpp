@@ -1,5 +1,4 @@
 #include "funcs.hpp"
-#include <Eigen/Core>
 
 Eigen::VectorXd ReLU(const Eigen::VectorXd &v){
     return v.array().max(0.0);
@@ -15,14 +14,6 @@ Eigen::VectorXd Identity(const Eigen::VectorXd &v){
 
 Eigen::VectorXd Identity_Derivative(const Eigen::VectorXd &v){
     return Eigen::VectorXd::Ones(v.size());
-}
-
-double error_func(const Eigen::VectorXd &out, const Eigen::VectorXd &target){
-    return 0.5 * (out - target).squaredNorm();
-}
-
-Eigen::VectorXd error_func_derivative(const Eigen::VectorXd &out, const Eigen::VectorXd &target){
-    return out - target;
 }
 
 Eigen::VectorXd SoftMax(const Eigen::VectorXd &logits){
