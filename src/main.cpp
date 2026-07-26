@@ -8,12 +8,16 @@
 #include "funcs.hpp"
 
 int main(int, char**){
+
+    // Example usage
+    // Passing random values into an untrained neural network
+
     std::srand(static_cast<unsigned int>(time(nullptr)));
 
-    Eigen::VectorXd testData(784);
+    Eigen::VectorXd testData(128);
     testData.setRandom();
 
-    Layer hidden1(784, 64, ReLU, ReLU_Derivative);
+    Layer hidden1(128, 64, ReLU, ReLU_Derivative);
     Layer hidden2(64, 64, ReLU, ReLU_Derivative);
     Layer output(64, 10, Identity, Identity_Derivative);
 
